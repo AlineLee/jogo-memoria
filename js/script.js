@@ -34,3 +34,35 @@ function hideCard(card){
 
 changePosition();
 
+var selectCards = [];
+
+document.querySelectorAll('.card .click-label').forEach(function(e){
+	e.addEventListener('click', function(e){
+		selectCards.push(this.parentElement);
+
+		setTimeout(function(){
+			if (selectCards.length == 2) {
+				if (thisMatch()){
+					window.alert('Yeh');
+					clearSelections(false);
+				}else {
+					window.alert('ohh oh');
+					clearSelections(true);
+				}
+			}
+
+		},300);
+	})
+});
+
+function thisMatch(){
+	return false;
+}
+
+function clearSelections(hideCardSelected) {
+	if (hideCardSelected == true) {
+		selectCards.forEach(function(e){hideCard(e)});
+	}
+	selectCards = [];
+}
+
