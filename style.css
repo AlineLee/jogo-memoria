@@ -1,0 +1,56 @@
+
+.cards {
+	margin: 3em;
+}
+
+.item {
+	width: 240px;
+	height: 240px;
+	text-align: center;
+	position: relative;
+	background-color: #d61766;
+}
+
+@keyframes gira {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	25% {
+		transform: rotate(90deg);
+	}
+	50% {
+		transform: rotate(180deg);
+	}
+	75% {
+		transform: rotate(270deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}	
+}
+
+.super-star {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	text-align: center;
+	transform: rotate(26deg);
+	display: inline-block;
+	animation: gira 4s 0s infinite linear;
+	background-color: inherit;
+	left: 0;
+	top: 0;
+	z-index: -1;
+}
+
+.super-star::before {
+	content: "";
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: inherit;
+	transform: rotate(135deg);
+	display: block;
+}

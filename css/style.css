@@ -1,0 +1,165 @@
+body {
+	background-color: #F5F5F5;
+	max-width: 980px;
+	margin: 0 auto;
+}
+
+header h1 {
+	text-align: center;
+    font-size: 3em;
+    padding: 1em;
+    color: dimgray;
+    font-weight: 600;
+}
+
+main {
+	text-align: center;
+	margin: 1em;
+	background-color: white;
+
+}
+.cards {
+	overflow: auto;
+	height: 750px;
+	position: relative;
+}
+
+.card {
+	width: 240px;
+	height: 240px;
+	margin: 3em;
+	perspective: 1000px;
+	list-style-type: none;
+
+	transition: 1s ease-in-out;
+}
+
+.card::active {
+	background-color: green;
+}
+
+.super-star {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	text-align: center;
+	transform: rotate(26deg);
+	display: inline-block;
+	animation: gira 4s 0s infinite linear;
+	background-color: inherit;
+	left: 0;
+	top: 0;
+	z-index: -1;
+}
+
+.super-star::before {
+	content: "";
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: inherit;
+	transform: rotate(135deg);
+	display: block;
+}
+
+.click-label {
+	position: absolute;
+	top: 0;
+	left: 0;
+	text-indent: -9999px;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+}
+
+@keyframes gira {
+	0% {
+		transform: rotate(0deg);
+		background-color: #ea4f4f;
+	}
+	25% {
+		transform: rotate(90deg);
+		background-color: pink;
+	}
+	50% {
+		transform: rotate(180deg);
+		background-color: orange;
+	}
+	75% {
+		transform: rotate(270deg);
+		background-color: #f1e686;
+	}
+	100% {
+		transform: rotate(360deg);
+		background-color: lightgreen;
+	}	
+}
+
+input[type=checkbox] {
+	position: absolute;
+	top: -9999px;
+	left: -9999px;
+}
+
+.picture {
+	position: relative;
+	transition: 0.5s;
+	transform-style: preserve-3d;
+	transform: rotateY(180deg);
+    height: 100%;
+    width: 100%;
+}
+
+input[type=checkbox]:checked ~ .picture {
+	backface-visibility: visible;
+	transform: rotateY(0deg);
+}
+
+input[type=checkbox] ~ .picture::after {
+	background-color: white;
+	content: '';
+	left: 0;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	transform: rotateY(180deg);
+	width: 100%;
+	height: 100%;
+}
+
+.pos1 {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.pos2 {
+	transform: translateX(10px);
+	position: absolute;
+	left: 300px;
+	top: 0;
+}
+
+.pos3 {
+	position: absolute;
+	left: 0;
+	top: 300px;
+}
+
+.pos4 {
+	position: absolute;
+	left: 300px;
+	top: 300px;
+}
+
+.shuffle {
+	bottom: 0;
+	width: 100%;
+	left: 0;
+	-webkit-appearance: none;
+	border: none;
+	padding: 1em;
+	background-color: darksalmon;
+	color: white;
+}
