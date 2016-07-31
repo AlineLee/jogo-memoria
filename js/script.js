@@ -25,6 +25,10 @@ function changePosition(){
 	}
 }
 
+function isTheCardTurnUp(card){
+	return card.getElementsByClassName('checkhack')[0].checked;
+}
+
 function hideCard(card){
 
 	var check = card.getElementsByClassName('checkhack')[0];
@@ -38,9 +42,17 @@ var selectCards = [];
 
 document.querySelectorAll('.card .click-label').forEach(function(e){
 	e.addEventListener('click', function(e){
-		selectCards.push(this.parentElement);
+		var card = this.parentElement;
+
+		if (isTheCardTurnUp(card)) {
+			e.preventDefault();
+			return;
+		}
+
+		selectCards.push(card);
 
 		setTimeout(function(){
+
 			if (selectCards.length == 2) {
 				if (thisMatch()){
 					window.alert('Yeh');
@@ -61,7 +73,9 @@ function thisMatch(){
 
 function clearSelections(hideCardSelected) {
 	if (hideCardSelected == true) {
-		selectCards.forEach(function(e){hideCard(e)});
+		selectCards.forEach(function(e){
+			hideCard(e);
+		});
 	}
 	selectCards = [];
 }
