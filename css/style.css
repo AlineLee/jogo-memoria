@@ -45,7 +45,7 @@ main {
 	text-align: center;
 	transform: rotate(26deg);
 	display: inline-block;
-	-animation: gira 4s 0s infinite linear;
+	animation: gira 4s 0s infinite linear;
 	background-color: inherit;
 	background-color: orange;
 	left: 0;

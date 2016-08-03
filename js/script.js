@@ -4,7 +4,7 @@ function shuffledList(length) {
 		return Number(n)+1;
 	});
 
-	for (i = newList.length; i; i--) {	
+	for (i = newList.length; i; i--) {
 		var j = Math.floor(Math.random() * i);
 		x = newList[i - 1];
 		newList[i - 1] = newList[j];
@@ -38,35 +38,35 @@ changePosition();
 
 var selectCards = [];
 
-document.querySelectorAll('.card .click-label').forEach(
-	function(e){e.addEventListener('click', function(e){
-		var card = this.parentElement;
+function cardClick(e) {
+	var card = e.target.parentElement;
+	if (isTheCardTurnUp(card)) {
+		e.preventDefault();
+		return;
+	}
+	selectCards.push(card);
+	card.querySelector('.picture').addEventListener('transitionend', function(){
+		if (selectCards.length == 2) {
+			if (thisMatch()){
+				console.log('Yeh');
+				clearSelections(false);
 
-		if (isTheCardTurnUp(card)) {
-			e.preventDefault();
-			return;
-		}
-
-		selectCards.push(card);
-
-		setTimeout(function(){
-			if (selectCards.length == 2) {
-				if (thisMatch()){
-					console.log('Yeh');
-					clearSelections(false);
-
-					if(!leftCardsTurnDown()) {
-						console.log('The End');
-						changePosition();
-					}
-				} else {
-					console.log('ohh oh');
-					clearSelections(true);
+				if(!leftCardsTurnDown()) {
+					console.log('The End');
+					changePosition();
 				}
+			} else {
+				console.log('ohh oh');
+				clearSelections(true);
 			}
+		}
+	});
+}
 
-		},400);
-	})
+document.querySelector('.cards').addEventListener('click', function(e){
+	if (e.target.matches('.click-label')) {
+		cardClick(e);
+	}
 });
 
 function thisMatch(){
@@ -86,9 +86,7 @@ function leftCardsTurnDown(){
 
 function clearSelections(hideCardSelected) {
 	if (hideCardSelected == true) {
-		selectCards.forEach(function(e){
-			hideCard(e);
-		});
+		selectCards.forEach(hideCard);
 	}
 	selectCards = [];
 }
