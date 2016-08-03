@@ -1,35 +1,36 @@
 function shuffledList(length) {
 
-    var newList =  Array.apply(null, {length: length}).map(Number.call, function(n){
-    	return Number(n)+1;
-    });
+	var newList =  Array.apply(null, {length: length}).map(Number.call, function(n){
+		return Number(n)+1;
+	});
 
 	for (i = newList.length; i; i--) {	
-	    var j = Math.floor(Math.random() * i);
-	    x = newList[i - 1];
-	    newList[i - 1] = newList[j];
-	    newList[j] = x;
-    }
+		var j = Math.floor(Math.random() * i);
+		x = newList[i - 1];
+		newList[i - 1] = newList[j];
+		newList[j] = x;
+	}
 
-    return newList;
+	return newList;
 }
 
 function changePosition(){
-	var cards = document.getElementsByClassName('card'),
-		change = shuffledList(cards.length);
+	var cards = document.querySelectorAll('.card'),
+		change = shuffledList(cards.length),
+		i=0;
 
-	for (var i = cards.length - 1; i >= 0; i--) {
-		hideCard(cards[i]);
-		cards[i].className = ['card', 'draw1', 'pos'+change[i]].join(' ');
-	}
+	cards.forEach(function(e){
+		hideCard(e);
+		e.className = ['card', 'draw1', 'pos'+change[i++]].join(' ');
+	});
 }
 
 function isTheCardTurnUp(card){
-	return card.getElementsByClassName('checkhack')[0].checked;
+	return card.querySelectorAll('.checkhack')[0].checked;
 }
 
 function hideCard(card){
-	var check = card.getElementsByClassName('checkhack')[0];
+	var check = card.querySelectorAll('.checkhack')[0];
 	check.checked = false;
 }
 
@@ -49,16 +50,15 @@ document.querySelectorAll('.card .click-label').forEach(
 		selectCards.push(card);
 
 		setTimeout(function(){
-
 			if (selectCards.length == 2) {
 				if (thisMatch()){
 					console.log('Yeh');
 					clearSelections(false);
+
 					if(!leftCardsTurnDown()) {
 						console.log('The End');
 						changePosition();
 					}
-
 				} else {
 					console.log('ohh oh');
 					clearSelections(true);
