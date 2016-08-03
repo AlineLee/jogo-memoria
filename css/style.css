@@ -28,14 +28,15 @@ main {
 	width: 240px;
 	height: 240px;
 	margin: 3em;
+
 	perspective: 1000px;
+	-webkit-perspective: 1000px;
+	-moz-perspective: 1000px;
+	-o-perspective: 1000px;
+
 	list-style-type: none;
 
 	transition: 1s ease-in-out;
-}
-
-.card::active {
-	background-color: green;
 }
 
 .super-star {
@@ -45,8 +46,9 @@ main {
 	text-align: center;
 	transform: rotate(26deg);
 	display: inline-block;
-	animation: gira 4s 0s infinite linear;
+	-animation: gira 4s 0s infinite linear;
 	background-color: inherit;
+	background-color: orange;
 	left: 0;
 	top: 0;
 	z-index: -1;
@@ -104,15 +106,41 @@ input[type=checkbox] {
 
 .picture {
 	position: relative;
+	background-color: orange;
+
+	-webkit-transition: 0.5s;
+	-moz-transition: 0.5s;
+	-o-transition: 0.5s;
 	transition: 0.5s;
+
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-o-transform-style: preserve-3d;
 	transform-style: preserve-3d;
+
+	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+	-o-transform: rotateY(180deg);
 	transform: rotateY(180deg);
+
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-o-backface-visibility: hidden;
+	backface-visibility: hidden;
+
     height: 100%;
     width: 100%;
 }
 
 input[type=checkbox]:checked ~ .picture {
+	-webkit-backface-visibility: visible;
+	-moz-backface-visibility: visible;
+	-o-backface-visibility: visible;
 	backface-visibility: visible;
+
+	-webkit-transform: rotateY(0deg);
+	-moz-transform: rotateY(0deg);
+	-o-transform: rotateY(0deg);
 	transform: rotateY(0deg);
 }
 
@@ -123,7 +151,17 @@ input[type=checkbox] ~ .picture::after {
 	height: 100%;
 	position: absolute;
 	top: 0;
+
+	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+	-o-transform: rotateY(180deg);
 	transform: rotateY(180deg);
+
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-o-backface-visibility: hidden;
+	backface-visibility: hidden;
+
 	width: 100%;
 	height: 100%;
 }
@@ -135,7 +173,6 @@ input[type=checkbox] ~ .picture::after {
 }
 
 .pos2 {
-	transform: translateX(10px);
 	position: absolute;
 	left: 300px;
 	top: 0;
