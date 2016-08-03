@@ -15,7 +15,6 @@ function shuffledList(length) {
 }
 
 function changePosition(){
-
 	var cards = document.getElementsByClassName('card'),
 		change = shuffledList(cards.length);
 
@@ -30,18 +29,16 @@ function isTheCardTurnUp(card){
 }
 
 function hideCard(card){
-
 	var check = card.getElementsByClassName('checkhack')[0];
 	check.checked = false;
-
 }
 
 changePosition();
 
 var selectCards = [];
 
-document.querySelectorAll('.card .click-label').forEach(function(e){
-	e.addEventListener('click', function(e){
+document.querySelectorAll('.card .click-label').forEach(
+	function(e){e.addEventListener('click', function(e){
 		var card = this.parentElement;
 
 		if (isTheCardTurnUp(card)) {
@@ -55,19 +52,35 @@ document.querySelectorAll('.card .click-label').forEach(function(e){
 
 			if (selectCards.length == 2) {
 				if (thisMatch()){
-					window.alert('Yeh');
+					console.log('Yeh');
 					clearSelections(false);
-				}else {
-					window.alert('ohh oh');
+					if(!leftCardsTurnDown()) {
+						console.log('The End');
+						changePosition();
+					}
+
+				} else {
+					console.log('ohh oh');
 					clearSelections(true);
 				}
 			}
 
-		},300);
+		},400);
 	})
 });
 
 function thisMatch(){
+	if(selectCards[0].getAttribute('data-card') == selectCards[1].getAttribute('data-card')){
+		return true;
+	}
+
+	return false;
+}
+
+function leftCardsTurnDown(){
+	if (document.querySelectorAll('input[type=checkbox]:not(:checked) ~ .picture').length > 0){
+		return true;
+	}
 	return false;
 }
 
