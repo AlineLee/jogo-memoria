@@ -14,7 +14,7 @@ function shuffledList(length) {
 	return newList;
 }
 
-function changePosition(){
+function initNewTurn(){
 	var cards = document.querySelectorAll('.card'),
 		change = shuffledList(cards.length),
 		i=0;
@@ -23,6 +23,8 @@ function changePosition(){
 		hideCard(e);
 		e.className = ['card', 'draw1', 'pos'+change[i++]].join(' ');
 	});
+
+	//showAllCardsQuiqkly(cards);
 }
 
 function isTheCardTurnUp(card){
@@ -34,7 +36,40 @@ function hideCard(card){
 	check.checked = false;
 }
 
-changePosition();
+function showCard(card){
+	var check = card.querySelectorAll('.checkhack')[0];
+	check.checked = true;
+}
+
+function winTurn(){
+	acumulatedWin++;
+
+	if (acumulatedWin > 0){
+		score = score + (acumulatedWin * 10);
+	} else {
+		score = 10;
+	}
+
+	updateScore();
+}
+
+function loseTurn(){
+
+	acumulatedWin = 0;
+	score = score - 10;
+
+	updateScore();
+}
+
+function updateScore(){
+	showScore = document.querySelector('.score');
+	showScore.innerText = score;
+}
+
+initNewTurn();
+
+var score = 0;
+var acumulatedWin = 0;
 
 var selectCards = [];
 
@@ -50,13 +85,13 @@ function cardClick(e) {
 			if (thisMatch()){
 				console.log('Yeh');
 				clearSelections(false);
+				winTurn();
 
 				if(!leftCardsTurnDown()) {
-					console.log('The End');
-					changePosition();
+					initNewTurn();
 				}
 			} else {
-				console.log('ohh oh');
+				loseTurn();
 				clearSelections(true);
 			}
 		}
@@ -73,7 +108,6 @@ function thisMatch(){
 	if(selectCards[0].getAttribute('data-card') == selectCards[1].getAttribute('data-card')){
 		return true;
 	}
-
 	return false;
 }
 
@@ -91,3 +125,14 @@ function clearSelections(hideCardSelected) {
 	selectCards = [];
 }
 
+function showAllCardsQuiqkly(cards){
+	cards.forEach(function(e){
+		showCard(e);
+
+		e.querySelector('.picture').addEventListener('transitionend', function(){
+			setTimeout(function () {
+				hideCard(e);
+			}, 1000);
+		});
+	});
+}
