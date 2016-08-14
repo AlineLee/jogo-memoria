@@ -2,19 +2,30 @@ function setup() {
 	score = 0;
 	acumulatedWin = 0;
 	selectCards = [];
-	pos = [[1,1],[1,2],[1,3],[2,1],[2,2],[2,3]];
 	cardList = document.querySelectorAll('.card');
+
+	var maxColumn = 4, x = 1, y = 1, i = 0;
+	pos = [];
+	while(pos.length < cardList.length) {
+		pos[i] = [x,y];
+		if(y == maxColumn) {
+			y = 0;
+			x++;
+		};
+		y++; i++;
+	}
+
 	sizeCard = parseInt(getComputedStyle(cardList[0], null).getPropertyValue("width")) +
 				(parseInt(getComputedStyle(cardList[0], null).getPropertyValue("margin"))) * 2;
 	var cardContainer = document.querySelectorAll('.cards')[0];
-	cardContainer.style.height = pos[pos.length - 1][0] * sizeCard + 'px';
-	cardContainer.style.width = pos[pos.length - 1][1] * sizeCard + 'px';
+	cardContainer.style.height = x * sizeCard + 'px';
+	cardContainer.style.width = maxColumn * sizeCard + 'px';
 
 	initNewTurn();
 }
 
-function shuffledList(length) {
-	var newList =  Array.apply(null, {length: length}).map(Number.call, Number);
+function shuffledList() {
+	var newList =  Array.apply(null, {length: cardList.length}).map(Number.call, Number);
 
 	for (i = newList.length; i; i--) {
 		var j = Math.floor(Math.random() * i);
@@ -27,7 +38,7 @@ function shuffledList(length) {
 }
 
 function initNewTurn(){
-	var change = shuffledList(cardList.length);
+	var change = shuffledList();
 
 	cardList.forEach(function(e){
 		hideCard(e);
@@ -88,7 +99,6 @@ function cardClick(e) {
 	card.querySelector('.picture').addEventListener('transitionend', function(){
 		if (selectCards.length == 2) {
 			if (thisMatch()){
-				console.log('Yeh');
 				clearSelections(false);
 				winTurn();
 
