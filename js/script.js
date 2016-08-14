@@ -1,8 +1,20 @@
-function shuffledList(length) {
+function setup() {
+	score = 0;
+	acumulatedWin = 0;
+	selectCards = [];
+	pos = [[1,1],[1,2],[1,3],[2,1],[2,2],[2,3]];
+	cardList = document.querySelectorAll('.card');
+	sizeCard = parseInt(getComputedStyle(cardList[0], null).getPropertyValue("width")) +
+				(parseInt(getComputedStyle(cardList[0], null).getPropertyValue("margin"))) * 2;
+	var cardContainer = document.querySelectorAll('.cards')[0];
+	cardContainer.style.height = pos[pos.length - 1][0] * sizeCard + 'px';
+	cardContainer.style.width = pos[pos.length - 1][1] * sizeCard + 'px';
 
-	var newList =  Array.apply(null, {length: length}).map(Number.call, function(n){
-		return Number(n)+1;
-	});
+	initNewTurn();
+}
+
+function shuffledList(length) {
+	var newList =  Array.apply(null, {length: length}).map(Number.call, Number);
 
 	for (i = newList.length; i; i--) {
 		var j = Math.floor(Math.random() * i);
@@ -15,13 +27,14 @@ function shuffledList(length) {
 }
 
 function initNewTurn(){
-	var cards = document.querySelectorAll('.card'),
-		change = shuffledList(cards.length),
-		i=0;
+	var change = shuffledList(cardList.length);
 
-	cards.forEach(function(e){
+	cardList.forEach(function(e){
 		hideCard(e);
-		e.className = ['card', 'draw1', 'pos'+change[i++]].join(' ');
+		var newPos = change[i++];
+
+		e.style.top = sizeCard * (pos[newPos][0] - 1) + 'px';
+		e.style.left = sizeCard * (pos[newPos][1] - 1) + 'px';
 	});
 
 	//showAllCardsQuiqkly(cards);
@@ -54,7 +67,6 @@ function winTurn(){
 }
 
 function loseTurn(){
-
 	acumulatedWin = 0;
 	score = score - 10;
 
@@ -65,13 +77,6 @@ function updateScore(){
 	showScore = document.querySelector('.score');
 	showScore.innerText = score;
 }
-
-initNewTurn();
-
-var score = 0;
-var acumulatedWin = 0;
-
-var selectCards = [];
 
 function cardClick(e) {
 	var card = e.target.parentElement;
@@ -136,3 +141,5 @@ function showAllCardsQuiqkly(cards){
 		});
 	});
 }
+
+setup();
