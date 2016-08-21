@@ -18,6 +18,7 @@ header h1 {
 main {
 	text-align: center;
 	background-color: #AFF2D1;
+	padding-bottom: 48px; /*score-size*/
 }
 
 .banner {
@@ -38,7 +39,6 @@ main {
 .cards {
 	height: 700px;
 	width: 750px;
-	margin-right: 1em;
 	position: relative;
 	display: inline-block;
 	overflow: hidden;
@@ -122,6 +122,11 @@ input[type=checkbox] {
 	position: absolute;
 	top: -9999px;
 	left: -9999px;
+}
+
+input[type=checkbox]:focus + .click-label {
+	box-shadow: 0 0 2px 3.5px #83bffc;
+	border-radius: 2px;
 }
 
 .picture {

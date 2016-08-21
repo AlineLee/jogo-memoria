@@ -7,7 +7,7 @@ function setup() {
 	var maxColumn = 4, x = 1, y = 1, i = 0;
 	pos = [];
 	while(pos.length < cardList.length) {
-		pos[i] = [x,y];
+		pos[i] = [x, y, i];
 		if(y == maxColumn) {
 			y = 0;
 			x++;
@@ -43,9 +43,12 @@ function initNewTurn(){
 	cardList.forEach(function(e){
 		hideCard(e);
 		var newPos = change[i++];
-
 		e.style.top = sizeCard * (pos[newPos][0] - 1) + 'px';
 		e.style.left = sizeCard * (pos[newPos][1] - 1) + 'px';
+		e.querySelector('.checkhack').tabIndex = pos[newPos][2] + 1;
+		if (pos[newPos][2] == 0) {
+			e.querySelector('.checkhack').focus();
+		}
 	});
 
 	//showAllCardsQuiqkly(cards);
@@ -113,8 +116,15 @@ function cardClick(e) {
 	});
 }
 
+
 document.querySelector('.cards').addEventListener('click', function(e){
 	if (e.target.matches('.click-label')) {
+		cardClick(e);
+	}
+});
+
+document.querySelector('.cards').addEventListener('keydown', function(e){
+	if (e.target.matches('.checkhack')) {
 		cardClick(e);
 	}
 });
