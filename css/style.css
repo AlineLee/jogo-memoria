@@ -49,6 +49,7 @@ main {
 	height: 146px;
 	margin: 30.24px;
 	position: absolute;
+	outline: none;
 
 	perspective: 1000px;
 	-webkit-perspective: 1000px;
