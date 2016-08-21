@@ -14,9 +14,17 @@
 	</header>
 	<main>
 		<ul class='cards'>
-			<li class='card' tabIndex=-1 tabIndex=-1 data-card='0'>
+			<li class='card' tabIndex=-1 data-card='0'>
 				<input class='checkhack' type=checkbox id='card1'>
 				<label class='click-label' for='card1'>Card1</label>
+				<span class='super-star'></span>
+				<figure class='picture'>
+					<img src="img/madimbu.png">
+				</figure>
+			</li>
+			<li class='card' tabIndex=-1 data-card='0'>
+				<input class='checkhack' type=checkbox id='card4'>
+				<label class='click-label' for='card4'>Card4</label>
 				<span class='super-star'></span>
 				<figure class='picture'>
 					<img src="img/madimbu.png">
@@ -36,14 +44,6 @@
 				<span class='super-star'></span>
 				<figure class='picture'>
 					<img src="img/kirby.png">
-				</figure>
-			</li>
-			<li class='card' tabIndex=-1 data-card='0'>
-				<input class='checkhack' type=checkbox id='card4'>
-				<label class='click-label' for='card4'>Card4</label>
-				<span class='super-star'></span>
-				<figure class='picture'>
-					<img src="img/madimbu.png">
 				</figure>
 			</li>
 			<li class='card' tabIndex=-1 data-card='2'>
@@ -112,8 +112,16 @@
 			</li>
 		</ul>
 		<article class='banner'>
-			<label>Pontuação</label>
-			<label class='score'>0</label>
+			<dl>
+				<dt>Pontuação</dt>
+					<dd class='score'>0</dd>
+				<dt>Duplas</dt>
+					<form class='pairs'>
+						<dd><input type="radio" class='qtd-pairs' name="qtd-pairs" value="2" checked>2</dd>
+						<dd><input type="radio" class='qtd-pairs' name="qtd-pairs" value="4">4</dd>
+						<dd><input type="radio" class='qtd-pairs' name="qtd-pairs" value="6">6</dd>
+					</form>
+			</dl>
 		</article>
 	</main>
 </body>

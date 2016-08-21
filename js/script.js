@@ -3,10 +3,11 @@ function setup() {
 	acumulatedWin = 0;
 	selectCards = [];
 	cardList = document.querySelectorAll('.card');
+	maxPairs = document.querySelector('input[name="qtd-pairs"]:checked').value * 2;
 
 	var maxColumn = 4, x = 1, y = 1, i = 0;
 	pos = [];
-	while(pos.length < cardList.length) {
+	while(pos.length < maxPairs) {
 		pos[i] = [x, y, i];
 		if(y == maxColumn) {
 			y = 0;
@@ -25,9 +26,9 @@ function setup() {
 }
 
 function shuffledList() {
-	var newList =  Array.apply(null, {length: cardList.length}).map(Number.call, Number);
+	var newList =  Array.apply(null, {length: maxPairs}).map(Number.call, Number);
 
-	for (i = newList.length; i; i--) {
+	for (var i = newList.length; i; i--) {
 		var j = Math.floor(Math.random() * i);
 		x = newList[i - 1];
 		newList[i - 1] = newList[j];
@@ -38,16 +39,25 @@ function shuffledList() {
 }
 
 function initNewTurn(){
-	var change = shuffledList();
+	var change = shuffledList(), i = 0;
 
 	cardList.forEach(function(e){
-		hideCard(e);
-		var newPos = change[i++];
-		e.style.top = sizeCard * (pos[newPos][0] - 1) + 'px';
-		e.style.left = sizeCard * (pos[newPos][1] - 1) + 'px';
-		e.querySelector('.checkhack').tabIndex = pos[newPos][2] + 1;
-		if (pos[newPos][2] == 0) {
-			e.querySelector('.checkhack').focus();
+		var checkhack = e.querySelector('.checkhack');
+
+		if (e.getAttribute('data-card') < ((maxPairs/2))) {
+			hideCard(e);
+			var newPos = change[i++];
+			e.style.top = sizeCard * (pos[newPos][0] - 1) + 'px';
+			e.style.left = sizeCard * (pos[newPos][1] - 1) + 'px';
+			checkhack.tabIndex = pos[newPos][2] + 1;
+			if (pos[newPos][2] == 0) {
+				e.querySelector('.checkhack').focus();
+			}
+			checkhack.disabled = false;
+			e.className = 'card'; //Gambiarra
+		} else {
+			checkhack.disabled = true;
+			e.className += ' hideCard';
 		}
 	});
 
@@ -129,6 +139,11 @@ document.querySelector('.cards').addEventListener('keydown', function(e){
 	}
 });
 
+document.querySelector('.pairs').addEventListener('change', function(e){
+	setup();
+});
+
+
 function thisMatch(){
 	if(selectCards[0].getAttribute('data-card') == selectCards[1].getAttribute('data-card')){
 		return true;
@@ -137,7 +152,7 @@ function thisMatch(){
 }
 
 function leftCardsTurnDown(){
-	if (document.querySelectorAll('input[type=checkbox]:not(:checked) ~ .picture').length > 0){
+	if (document.querySelectorAll('input[type=checkbox]:not(:checked):not(:disabled) ~ .picture').length > 0){
 		return true;
 	}
 	return false;
