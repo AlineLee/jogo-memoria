@@ -1,9 +1,13 @@
+html {
+	height: 100%;
+}
 body {
 	font-family: 'Lato', sans-serif;
 	background-color: #F5F5F5;
 	max-width: 980px;
 	margin: 0 auto;
 	box-sizing: border-box;
+	height: 100%;
 }
 
 header h1 {
@@ -19,6 +23,7 @@ main {
 	text-align: center;
 	background-color: #AFF2D1;
 	padding-bottom: 48px; /*score-size*/
+	min-height: calc(100% - 48px - 4em);
 }
 
 .banner {
@@ -164,9 +169,6 @@ input[type=checkbox]:checked ~ .super-star{
 }
 
 input[type=checkbox]:checked ~ .picture {
-	-webkit-backface-visibility: visible;
-	backface-visibility: visible;
-
 	-webkit-transform: rotateY(0deg);
 	transform: rotateY(0deg);
 }

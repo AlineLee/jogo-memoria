@@ -19,7 +19,7 @@ function setup() {
 	sizeCard = parseInt(getComputedStyle(cardList[0], null).getPropertyValue("width")) +
 				(parseInt(getComputedStyle(cardList[0], null).getPropertyValue("margin"))) * 2;
 	var cardContainer = document.querySelectorAll('.cards')[0];
-	cardContainer.style.height = x * sizeCard + 'px';
+	cardContainer.style.height = Math.ceil(maxPairs / maxColumn) * sizeCard + 'px';
 	cardContainer.style.width = maxColumn * sizeCard + 'px';
 
 	initNewTurn();
