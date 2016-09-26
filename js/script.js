@@ -23,7 +23,11 @@ define(['score', 'pack'], function(score, pack) {
 		cardContainer.style.height = Math.ceil(maxPairs / maxColumn) * sizeCard + 'px';
 		cardContainer.style.width = maxColumn * sizeCard + 'px';
 
+
 		pack.initNewTurn(maxPairs, cardList);
+
+		cardList = document.querySelectorAll('.card:not(.hideCard)');
+
 		pack.showAllCardsQuiqkly(cardList);
 	};
 
