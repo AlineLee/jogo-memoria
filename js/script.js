@@ -24,6 +24,7 @@ define(['score', 'pack'], function(score, pack) {
 		cardContainer.style.width = maxColumn * sizeCard + 'px';
 
 		pack.initNewTurn(maxPairs, cardList);
+		pack.showAllCardsQuiqkly(cardList);
 	};
 
 	var verifyIfWin = function(){

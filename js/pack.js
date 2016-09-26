@@ -5,6 +5,13 @@ define('pack', ['cardManipulate', 'utils', 'verify'], function(cardManipulate, u
 		return (selectCards.length == 2);
 	};
 
+	var waitAndHide = function(e){
+		setTimeout(function () {
+			cardManipulate.hide(e);
+			e.removeEventListener("transitionend", this);
+		}, 2000);
+	};
+
 	return {
 
 		canSelectCard: function(card) {
@@ -34,12 +41,7 @@ define('pack', ['cardManipulate', 'utils', 'verify'], function(cardManipulate, u
 		showAllCardsQuiqkly: function(cards){
 			cards.forEach(function(e){
 				cardManipulate.show(e);
-
-				e.querySelector('.picture').addEventListener('transitionend', function(){
-					setTimeout(function () {
-						cardManipulate.hide(e);
-					}, 1000);
-				});
+				e.addEventListener('transitionend', waitAndHide(e));
 			});
 		},
 
@@ -48,6 +50,7 @@ define('pack', ['cardManipulate', 'utils', 'verify'], function(cardManipulate, u
 		},
 
 		initNewTurn: function(maxPairs, cardList){
+
 			var change = utils.shuffledList(maxPairs), i = 0;
 
 			cardList.forEach(function(e){
@@ -69,7 +72,6 @@ define('pack', ['cardManipulate', 'utils', 'verify'], function(cardManipulate, u
 					e.className += ' hideCard';
 				}
 			});
-
 		}
 	};
 });

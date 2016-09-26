@@ -75,7 +75,10 @@ main {
 }
 
 .super-star {
-	-animation: gira 4s 0s infinite linear;
+	animation-name: gira;
+	animation-timing-function: ease-in-out;
+	animation-duration: 4s;
+	animation-iteration-count: infinite;
 	width: 100%;
 	height: 100%;
 	position: absolute;
