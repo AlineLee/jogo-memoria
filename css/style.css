@@ -23,7 +23,7 @@ main {
 	text-align: center;
 	background-color: #AFF2D1;
 	padding-bottom: 48px; /*score-size*/
-	min-height: calc(100% - 48px - 4em);
+	min-height: calc(100% - 96px - 4em);
 }
 
 .banner {
