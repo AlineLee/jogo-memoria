@@ -1,14 +1,14 @@
 define(['score', 'pack'], function(score, pack) {
-	var cardList, maxPairs;
+	var cardList, maxCards;
 
 
 	function setup() {
 		cardList = document.querySelectorAll('.card');
-		maxPairs = document.querySelector('input[name="qtd-pairs"]:checked').value * 2;
+		maxCards = document.querySelector('input[name="qtd-pairs"]:checked').value * 2;
 
 		var maxColumn = 4, x = 1, y = 1, i = 0;
 		pos = [];
-		while(pos.length < maxPairs) {
+		while(pos.length < maxCards) {
 			pos[i] = [x, y, i];
 			if(y == maxColumn) {
 				y = 0;
@@ -20,11 +20,11 @@ define(['score', 'pack'], function(score, pack) {
 		sizeCard = parseInt(getComputedStyle(cardList[0], null).getPropertyValue("width")) +
 					(parseInt(getComputedStyle(cardList[0], null).getPropertyValue("margin"))) * 2;
 		var cardContainer = document.querySelectorAll('.cards')[0];
-		cardContainer.style.height = Math.ceil(maxPairs / maxColumn) * sizeCard + 'px';
+		cardContainer.style.height = Math.ceil(maxCards / maxColumn) * sizeCard + 'px';
 		cardContainer.style.width = maxColumn * sizeCard + 'px';
 
 
-		pack.initNewTurn(maxPairs, cardList);
+		pack.initNewTurn(maxCards, cardList);
 
 		cardList = document.querySelectorAll('.card:not(.hideCard)');
 
@@ -38,7 +38,7 @@ define(['score', 'pack'], function(score, pack) {
 				score.winTurn();
 
 				if(!pack.leftCardsTurnDown()) {
-					pack.initNewTurn(maxPairs, cardList);
+					pack.initNewTurn(maxCards, cardList);
 				}
 			} else {
 				score.loseTurn();

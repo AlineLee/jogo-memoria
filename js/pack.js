@@ -49,14 +49,14 @@ define('pack', ['cardManipulate', 'utils', 'verify'], function(cardManipulate, u
 			return (document.querySelectorAll('input[type=checkbox]:not(:checked):not(:disabled) ~ .picture').length > 0);
 		},
 
-		initNewTurn: function(maxPairs, cardList){
+		initNewTurn: function(maxCards, cardList){
 
-			var change = utils.shuffledList(maxPairs), i = 0;
+			var change = utils.shuffledList(maxCards), i = 0;
 
 			cardList.forEach(function(e){
 				var checkhack = e.querySelector('.checkhack');
 
-				if (e.getAttribute('data-card') < ((maxPairs/2))) {
+				if (e.getAttribute('data-card') < ((maxCards/2))) {
 					cardManipulate.hide(e);
 					var newPos = change[i++];
 					e.style.top = sizeCard * (pos[newPos][0] - 1) + 'px';
